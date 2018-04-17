@@ -1,0 +1,12 @@
+.article_size_sm .article__title {
+	display: -webkit-box;
+	grid-row: span 1;
+	grid-column: span 1;
+	overflow: hidden;
+	max-height: 4.28571rem;
+	font-size: 1.21429rem;
+	line-height: 1.42857rem;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+}

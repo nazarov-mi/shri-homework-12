@@ -1,0 +1,11 @@
+.article_size_sm .article__preview img {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	min-height: 100%;
+}
+
+.article_size_sm .article__preview {
+	grid-row: span 1;
+}

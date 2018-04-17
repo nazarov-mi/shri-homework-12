@@ -1,0 +1,3 @@
+.article_size_sm .article__aside {
+	grid-row: span 1;
+}
