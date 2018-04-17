@@ -1,0 +1,4 @@
+.controls_direction_vertical {
+	flex-direction: column;
+	height: 100%;
+}

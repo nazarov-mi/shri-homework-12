@@ -1,0 +1,7 @@
+.svg-sheet {
+	position: fixed;
+	top: -99999px;
+	left: -99999px;
+	width: 0;
+	height: 0;
+}

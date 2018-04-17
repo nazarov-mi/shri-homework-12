@@ -1,0 +1,6 @@
+({
+	shouldDeps: [
+		'header',
+		'body'
+	]
+})

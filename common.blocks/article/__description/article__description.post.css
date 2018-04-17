@@ -1,0 +1,11 @@
+.article__description {
+	display: block;
+	display: -webkit-box;
+	max-height: 5.71428rem;
+	margin: 8px 0 0;
+	overflow: hidden;
+	line-height: 1.42857rem;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+}

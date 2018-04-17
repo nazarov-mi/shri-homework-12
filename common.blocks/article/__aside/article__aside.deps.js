@@ -1,0 +1,6 @@
+({
+	elem: 'aside',
+	shouldDeps: [
+		'controls'
+	]
+})

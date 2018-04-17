@@ -1,0 +1,19 @@
+.controls__link {
+	display: block;
+	flex: none;
+	margin: 0 8px;
+	cursor: pointer;
+	fill: #d3d3d3;
+	pointer-events: all;
+	touch-action: manipulation;
+}
+
+.controls__link svg {
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+.controls__link:active {
+	fill: #000000;
+}
