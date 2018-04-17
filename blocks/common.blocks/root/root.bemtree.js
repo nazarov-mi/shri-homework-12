@@ -21,13 +21,13 @@ block('root')({
 				},
 				{
 					elem: 'css',
-					url: `/${data.platformName}.min.css`
+					url: `/${data.bundle}/${data.page}.min.css`
 				}
 			],
 			scripts: [
 				{
 					elem: 'js',
-					url: `/${data.platformName}.min.js`
+					url: `/${data.bundle}/${data.page}.min.js`
 				}
 			],
 			head: [
