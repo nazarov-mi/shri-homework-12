@@ -76,14 +76,11 @@
   },
   "scripts": {
     "start": "node server",
-    "postinstall": "npm run drop-cache && npm run make",
-    "make:desktop": "YENV_PLATFORM=desktop enb make",
-    "make:tablet": "YENV_PLATFORM=tablet enb make",
-    "make:mobile": "YENV_PLATFORM=mobile enb make",
-    "make": "npm run make:desktop && npm run make:tablet && npm run make:mobile",
-    "drop-cache": "rm -rf .enb/tmp",
-    "dev": "npm run make && nodemon",
+    "serve": "npm run make && nodemon",
     "build": "YENV=production npm run make",
+    "make": "enb make",
+    "drop-cache": "rm -rf .enb/tmp",
+    "postinstall": "npm run drop-cache && npm run make",
     "watch": "chokidar '*.blocks/**' --initial -c 'enb make && notify -t bem-express -m Built'",
     "test": "npm run lint && npm run make",
     "lint": "eslint . && bemhint . && stylelint *.blocks/**/*.css"
