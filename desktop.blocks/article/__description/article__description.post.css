@@ -1,0 +1,13 @@
+.article_size_sm .article__description {
+	grid-row: span 1;
+}
+
+.article_size_md .article__description {
+	grid-column: span 1;
+	grid-row: span 1;
+}
+
+.article_size_lg .article__description {
+	grid-column: span 1;
+	grid-row: span 1;
+}

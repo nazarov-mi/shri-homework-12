@@ -1,0 +1,7 @@
+.article_size_lg {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto 1fr auto;
+	grid-gap: 0 16px;
+	height: 245px;
+}

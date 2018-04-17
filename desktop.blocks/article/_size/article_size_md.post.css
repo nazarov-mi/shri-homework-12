@@ -1,0 +1,6 @@
+.article_size_md {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-rows: auto 1fr auto;
+	height: 306px;
+}

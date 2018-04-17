@@ -1,0 +1,35 @@
+.article__title {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+}
+
+.article_size_sm .article__title {
+	grid-row: span 1;
+	grid-column: span 1;
+	max-height: 4.28571rem;
+	font-size: 1.21429rem;
+	line-height: 1.42857rem;
+	-webkit-line-clamp: 3;
+}
+
+.article_size_md .article__title,
+.article_size_lg .article__title {
+	font-size: 1.35714rem;
+	line-height: 1.64286rem;
+}
+
+.article_size_md .article__title {
+	grid-column: span 2;
+	grid-row: span 1;
+	max-height: 4.92858rem;
+	-webkit-line-clamp: 3;
+}
+
+.article_size_lg .article__title {
+	grid-column: span 1;
+	grid-row: span 1;
+	max-height: 3.28572rem;
+	-webkit-line-clamp: 2;
+}
