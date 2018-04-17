@@ -30,6 +30,20 @@ const articles = require('./../src/data.js')
 
 require('debug-http')();
 
+function getBundle(req) {
+	const uaHeader = req.headers['user-agent'];
+	const ua = useragent.parse(uaHeader);
+
+	if (ua.isTablet) {
+		return 'tablet';
+	} else
+	if (ua.isMobile) {
+		return 'mobile';
+	}
+
+	return 'desktop';
+}
+
 app
 	.disable('x-powered-by')
 	.enable('trust proxy')
@@ -59,23 +73,6 @@ passport.deserializeUser(function(user, done) {
 	done(null, JSON.parse(user));
 });
 
-app.use('/', function(req, res, next) {
-	const uaHeader = req.headers['user-agent'];
-	const ua = useragent.parse(uaHeader);
-	let platformName = 'desktop'
-
-	if (ua.isTablet) {
-		platformName = 'tablet';
-	} else
-	if (ua.isMobile) {
-		platformName = 'mobile';
-	}
-
-	req.platformName = platformName;
-
-	next();
-});
-
 app.get('/ping/', function(req, res) {
 	res.send('ok');
 });
@@ -83,7 +80,8 @@ app.get('/ping/', function(req, res) {
 app.get('/', function(req, res) {
 	render(req, res, {
 		articles,
-		platformName: req.platformName,
+		page: 'index',
+		bundle: getBundle(req),
 		view: 'page-index',
 		title: 'DZEN',
 		meta: {
@@ -100,7 +98,7 @@ isDev && require('./rebuild')(app);
 
 app.get('*', function(req, res) {
 	res.status(404);
-	return render(req, res, { view: '404' });
+	return render(req, res, { view: '404', page: 'index' });
 });
 
 if (isDev) {

@@ -6,14 +6,14 @@ const config = require('./config');
 const isDev = process.env.NODE_ENV === 'development';
 const useCache = !isDev;
 const cacheTTL = config.cacheTTL;
-const templatesCache = Object.create(null)
-let cache = Object.create(null);
+const cache = {};
 
 function render(req, res, data, context) {
 	const query = req.query;
 	const user = req.user;
 	const cacheKey = req.originalUrl + (context ? JSON.stringify(context) : '') + (user ? JSON.stringify(user) : '');
 	const cached = cache[cacheKey];
+	const templates = getTemplates( data.page, data.bundle );
 
 	if (useCache && cached && (new Date() - cached.timestamp < cacheTTL)) {
 		return res.send(cached.html);
@@ -26,15 +26,14 @@ function render(req, res, data, context) {
 		context: context,
 		// extend with data needed for all routes
 		data: Object.assign({}, {
+			view: data.view || 'page-' + data.page,
+			params: req.params,
 			url: req._parsedUrl,
 			csrf: req.csrfToken()
 		}, data)
 	};
 
-	const platformName = req.platformName;
-	const templates = getTemplates(platformName, platformName);
-
-	let bemjson;
+	let bemjson, html;
 
 	try {
 		bemjson = templates.BEMTREE.apply(bemtreeCtx);
@@ -45,8 +44,6 @@ function render(req, res, data, context) {
 	}
 
 	if (isDev && query.bemjson) return res.send('<pre>' + JSON.stringify(bemjson, null, 4) + '</pre>');
-
-	let html;
 
 	try {
 		html = templates.BEMHTML.apply(bemjson);
@@ -64,30 +61,20 @@ function render(req, res, data, context) {
 }
 
 function dropCache() {
-	cache = Object.create(null);
+	cache = {};
 }
 
 function evalFile(filename) {
 	return nodeEval(fs.readFileSync(filename, 'utf8'), filename);
 }
 
-function createTemplates(platformName, bundleName) {
-	const pathToBundle = path.resolve(__dirname, '..', `${platformName}.bundles`, bundleName);
+function getTemplates(bundleName = 'index', level = 'desktop') {
+	const pathToBundle = path.resolve('bundles', level + '.bundles', bundleName);
 
 	return {
-		BEMTREE: evalFile(path.join(pathToBundle, `${bundleName}.bemtree.js`)).BEMTREE,
-		BEMHTML: evalFile(path.join(pathToBundle, `${bundleName}.bemhtml.js`)).BEMHTML
+		BEMTREE: evalFile(path.join(pathToBundle, bundleName + '.bemtree.js')).BEMTREE,
+		BEMHTML: evalFile(path.join(pathToBundle, bundleName + '.bemhtml.js')).BEMHTML
 	};
-}
-
-function getTemplates(platformName = 'desktop', bundleName = 'index') {
-	const key = `${platformName}_${bundleName}`;
-
-	if (templatesCache[key] && !isDev) {
-		return templatesCache[key];
-	}
-
-	return (templatesCache[key] = createTemplates(platformName, bundleName));
 }
 
 module.exports = {
