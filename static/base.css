@@ -1,0 +1,49 @@
+article,
+aside,
+figure,
+footer,
+header,
+section {
+	display: block;
+}
+
+html {
+	min-width: 300px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	box-sizing: border-box;
+	font-size: 16px;
+	text-rendering: optimizeLegibility;
+	text-size-adjust: 100%;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-ms-overflow-style: scrollbar;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-overflow-scrolling: touch;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	color: #000000;
+	font-family: 'YS Text', Arial, sans-serif;
+	font-weight: normal;
+	font-size: 1rem;
+	line-height: 1.42857rem;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+@media screen and (min-width: 640px) {
+	html {
+		font-size: 14px;
+	}
+}
